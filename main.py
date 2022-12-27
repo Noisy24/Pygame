@@ -8,9 +8,12 @@ class Board:
         self.height = height
         self.board = [[0] * width for _ in range(height)]
         # значения по умолчанию
-        self.cell_size = 80
-        self.left = 1000 // 2 - (self.cell_size * 6) // 2
-        self.top = 700 // 2 - (self.cell_size * 6) // 2
+        self.r = 0
+        self.g = 255
+        self.b = 0
+        self.cell_size = 70
+        self.left = 1000 // 2 - (self.cell_size * 9) // 2
+        self.top = 700 // 2 - (self.cell_size * 9) // 2
 
     # настройка внешнего вида
     def set_view(self, left, top, cell_size):
@@ -21,10 +24,10 @@ class Board:
     def render(self, surface):
         for r in range(len(self.board)):
             for c in range(len(self.board[r])):
-                pygame.draw.rect(surface, 'white',
-                                 (self.left + c * self.cell_size,
-                                  self.top + r * self.cell_size,
-                                  self.cell_size, self.cell_size), 1)
+                pygame.draw.rect(surface, '#99DDCC',
+                                 ((self.left + c * self.cell_size),
+                                  (self.top + r * self.cell_size),
+                                  self.cell_size + 1, self.cell_size + 1), 1)
 
     def get_click(self, mouse_pos):
         cell = self.get_cell(mouse_pos)
@@ -45,8 +48,8 @@ class Board:
 if __name__ == '__main__':
     pygame.init()
     screen = pygame.display.set_mode((1000, 700))
-    screen.fill('grey')
-    board = Board(6, 6)
+    screen.fill('#BAD7DF')
+    board = Board(9, 9)
     running = True
     while running:
         for event in pygame.event.get():
